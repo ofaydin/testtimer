@@ -1,0 +1,47 @@
+package javatimer;
+
+import java.util.Timer;
+import java.util.TimerTask;
+ 
+public class TimerControl {
+	public static Timer myTimer = null;
+	static long aaa=60000;
+ 
+       public static  void basla() {
+             myTimer=new Timer();
+             for (int i=0;i<5;i++){
+            	 System.out.println(" ********* = "+aaa );
+            	 myTimer.scheduleAtFixedRate(new donbabamdon(i),i*10, aaa);
+             }
+       }
+       
+       
+      public static class donbabamdon extends TimerTask {
+    	  public int sirasi;
+    	  
+    	  public donbabamdon(int i) {
+			this.sirasi=i;
+		  }
+                 @Override
+                 public void run() {
+                 if(sirasi == 3){
+                	
+                	 this.cancel();
+                	 myTimer.scheduleAtFixedRate(new donbabamdon(8),0,8000);
+                	 System.out.println(" ++++++++++++ = "+this.scheduledExecutionTime());
+                	 
+                 aaa=10000; 
+                 System.out.println(" --------------- = "+aaa );
+               //  basla();
+                 }
+                 System.out.println(" sırası = "+sirasi );
+                
+                 }
+                 
+             }
+      
+      public static void main(String[] args)
+      {
+    	  basla();
+      }
+}
